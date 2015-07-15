@@ -1,0 +1,73 @@
+Ramp.exe
+========
+
+Colour ramp tester.
+
+Should compile under C++98 standards.
+
+USAGE: ramp.exe display tl tr [bl] [br]
+
+Constructs a colour ramp demo suitable for testing display drivers.
+
+There follows a short discussion of the main components of the program.
+
+ColourFormat
+------------
+
+Used for handling information about the bit format of pixel colour
+representation. Most of the internal maths is done using color vectors
+(represented by the ColourNorm struct) where the r,g,b components of a colour
+are represented by doubles between 0..1. The ColourFormat class stores
+information about the bit format of the colour representation (in the form of
+offsets and widths of the bitfields of each colour component). This class then
+takes care of the conversion between ColourNorm representation and the bit field
+representation, with equivalent representation of the current colour stored in
+the colour_bf and colour_norm member variables.
+Using this ColourNorm representation should make it relatively painless to
+modifiy this ramp tester for use with different pixel formats.
+
+parse_input_colours
+-------------------
+
+This is a standalone function for the parsing of the input. It's only job is to
+populate the 4 corner colours via the pointer to an array of ColourFormat
+objects it is given
+
+BandTester
+----------
+
+Where the majority of the calculations are caried out, but built with a small
+interface to facilitate ease of use and easy alteration of what happens inside
+it. 
+Upon construction a pair of gradients are calculated for the colour change per
+pixel on the left and right extremities of the screen. These are calculated
+using the ColourNorm representation.
+
+The draw_screen method does the actual work of drawing to the display's
+framebuffer. This method progresses line by line, calculating the pixel colours
+of the left and right extremities and then calculating the horizontal gradient
+for that line and then the pixel colours inbetween. Once again this is done
+using the ColourNorm representation. The pixels colour is then converted into
+the display's bit field representation by the ColourFormat object prior to the
+draw_raster method of the display being called. Thus, just changing the
+ColourFormat object is all that is necessary to change the format of the 
+bit fields passed to the draw_raster method.
+
+Errors
+------
+
+Errors are handled by the colour_chart_err.h source file, which contains a
+static variable keeping a record of the last error to occur. This makes it
+easy to safely check for errors in the 'main' function of the program and exit
+the program safely here if necessary. This is important to ensure that all
+destructors are called correctly.
+
+Unit-tests
+----------
+
+The tests directory contains a very simple testing harness and a set of unit
+tests. The test harness contains a list of function pointers to functions that
+return 1 on success and 0 on failure. These functions are simply called in
+sequence when the test harness is run. A similar error logging mechanism to that
+used for run-time errors is used to provide human readable information about
+what went wrong.
