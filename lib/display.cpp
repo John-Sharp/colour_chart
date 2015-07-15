@@ -43,3 +43,8 @@ void Display::draw_raster(int x, int y,
 {
       memcpy(&frame_buffer[y*W+x], pixels, width*sizeof(unsigned short));
 }
+
+unsigned short *get_frame_buffer()
+{
+    return frame_buffer;
+}

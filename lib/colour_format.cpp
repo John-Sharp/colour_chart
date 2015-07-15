@@ -1,4 +1,5 @@
 #include "colour_format.h"
+#include "math.h"
 
 ColourFormat::ColourFormat(
     BitfieldDesc r_bf_desc,
@@ -61,10 +62,11 @@ void ColourFormat::set_colour(uint16_t colour)
 
 void ColourFormat::set_colour(ColourNorm colour)
 {
-    colour_bf = 0;
-    colour_norm.r = 0.0f;
-    colour_norm.g = 0.0f;
-    colour_norm.b = 0.0f;
+    colour_norm.r = colour.r;
+    colour_norm.g = colour.g;
+    colour_norm.b = colour.b;
+
+    set_bf_from_norm();
 }
 
 void ColourFormat::set_colour(double r, double g, double b)
@@ -79,7 +81,7 @@ void ColourFormat::set_colour(double r, double g, double b)
 uint16_t ColourFormat::get_bf_cmpt_from_norm_cmpt(double norm_cmpt, const BitfieldDesc &bf_desc)
 {
     double scale_factor = static_cast<double>((1 << bf_desc.width)-1);
-    uint16_t bf_cmpt = static_cast<int>(norm_cmpt * scale_factor);
+    uint16_t bf_cmpt = static_cast<int>(round(norm_cmpt * scale_factor));
     bf_cmpt = bf_cmpt << bf_desc.offset;
     return bf_cmpt;
 }

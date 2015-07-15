@@ -35,9 +35,6 @@ public:
     void set_colour(ColourNorm colour);
     void set_colour(double r, double g, double b);
 
-    void get_colour_bf();
-    void get_colour_norm();
-
     BitfieldDesc r_bf_desc;
     BitfieldDesc g_bf_desc;
     BitfieldDesc b_bf_desc;

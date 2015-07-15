@@ -9,4 +9,6 @@ public:
 	void draw_raster(int x, int y,
               const unsigned short *pixels, int width);
 };
+
+unsigned short *get_frame_buffer();
 #endif

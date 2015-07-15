@@ -79,9 +79,9 @@ void BandTester::draw_line(unsigned int line_no)
     start_colour.b += gradients[GRAD_LEFT_DOWN][B] * static_cast<double>(line_no);
 
     ColourNorm end_colour = corner_colours[TR].colour_norm;
-    end_colour.r += gradients[GRAD_LEFT_DOWN][R] * static_cast<double>(line_no);
-    end_colour.g += gradients[GRAD_LEFT_DOWN][G] * static_cast<double>(line_no);
-    end_colour.b += gradients[GRAD_LEFT_DOWN][B] * static_cast<double>(line_no);
+    end_colour.r += gradients[GRAD_RIGHT_DOWN][R] * static_cast<double>(line_no);
+    end_colour.g += gradients[GRAD_RIGHT_DOWN][G] * static_cast<double>(line_no);
+    end_colour.b += gradients[GRAD_RIGHT_DOWN][B] * static_cast<double>(line_no);
 
     ColourFormat pixel_colour = corner_colours[TL];
 
