@@ -1,7 +1,7 @@
-all: main.cpp colour_format.cpp colour_format.h \
-	colour_chart_err.h colour_chart_err.cpp \
-	input_parser.h input_parser.cpp \
-	display.h display.cpp \
-	band_tester.h band_tester.cpp
-	g++ main.cpp colour_format.cpp colour_chart_err.cpp \
-		input_parser.cpp display.cpp band_tester.cpp -o colour_chart
+all: src/main.cpp lib/colour_format.cpp lib/colour_format.h \
+	lib/colour_chart_err.h lib/colour_chart_err.cpp \
+	lib/input_parser.h lib/input_parser.cpp \
+	lib/display.h lib/display.cpp \
+	lib/band_tester.h lib/band_tester.cpp
+	g++ -std=c++98 src/main.cpp lib/colour_format.cpp lib/colour_chart_err.cpp \
+		lib/input_parser.cpp lib/display.cpp lib/band_tester.cpp -o bin/ramp.exe

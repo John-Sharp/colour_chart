@@ -4,19 +4,12 @@
 #include <stdio.h>
 #include <iostream>
 
-#include "colour_chart_constants.h"
-#include "colour_format.h"
-#include "colour_chart_err.h"
-#include "input_parser.h"
-#include "display.h"
-#include "band_tester.h"
-
-
-void print_colour(ColourNorm c) {
-    std::cout << "( " << c.r << ", " << c.g << ", " << c.b << ")" << '\n';
-    return;
-}
-
+#include "../lib/colour_chart_constants.h"
+#include "../lib/colour_format.h"
+#include "../lib/colour_chart_err.h"
+#include "../lib/input_parser.h"
+#include "../lib/display.h"
+#include "../lib/band_tester.h"
 
 int main(int argv, char **argc)
 {

@@ -33,6 +33,7 @@ public:
 
     void set_colour(uint16_t colour);
     void set_colour(ColourNorm colour);
+    void set_colour(double r, double g, double b);
 
     void get_colour_bf();
     void get_colour_norm();
@@ -44,6 +45,8 @@ public:
     ColourNorm colour_norm;
 private:
     double get_norm_from_bf(BitfieldDesc &bf_desc);
+    uint16_t get_bf_cmpt_from_norm_cmpt(double norm_cmpt, const BitfieldDesc &bf_desc);
+    void set_bf_from_norm();
 };
 
 class ColourFormat_RGB565 : public ColourFormat {

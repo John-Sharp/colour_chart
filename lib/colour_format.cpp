@@ -67,6 +67,30 @@ void ColourFormat::set_colour(ColourNorm colour)
     colour_norm.b = 0.0f;
 }
 
+void ColourFormat::set_colour(double r, double g, double b)
+{
+    colour_norm.r = r;
+    colour_norm.g = g;
+    colour_norm.b = b;
+
+    set_bf_from_norm();
+}
+
+uint16_t ColourFormat::get_bf_cmpt_from_norm_cmpt(double norm_cmpt, const BitfieldDesc &bf_desc)
+{
+    double scale_factor = static_cast<double>((1 << bf_desc.width)-1);
+    uint16_t bf_cmpt = static_cast<int>(norm_cmpt * scale_factor);
+    bf_cmpt = bf_cmpt << bf_desc.offset;
+    return bf_cmpt;
+}
+
+void ColourFormat::set_bf_from_norm()
+{
+    colour_bf = get_bf_cmpt_from_norm_cmpt(colour_norm.r, r_bf_desc);
+    colour_bf += get_bf_cmpt_from_norm_cmpt(colour_norm.g, g_bf_desc);
+    colour_bf += get_bf_cmpt_from_norm_cmpt(colour_norm.b, b_bf_desc);
+}
+
 ColourFormat_RGB565::ColourFormat_RGB565() :
     ColourFormat(
         11, // offset red

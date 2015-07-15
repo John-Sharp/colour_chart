@@ -11,8 +11,8 @@ enum colour_chart_errno {
 
 const char * const colour_chart_error_messages[] = {
     "",
-    "Program usage: ramp.exe display tl tr [bl] [br]",
-    "Error! Problem connecting with display"
+    "Program usage: ramp.exe display tl tr [bl] [br]\n",
+    "Error! Problem connecting with display\n"
 
 };
 
